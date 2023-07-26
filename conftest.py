@@ -34,6 +34,6 @@ def github_api():
 
 
 @pytest.fixture
-def sqlite_work():
+def sqlite_table_connection():
     table_connection = Database()
     yield table_connection

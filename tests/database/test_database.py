@@ -3,22 +3,19 @@ from modules.common.database import Database
 
 
 @pytest.mark.database
-def test_database_connection():
-    db = Database()
-    db.test_connection()
+def test_database_connection(sqlite_table_connection):
+    sqlite_table_connection.test_connection()
 
 
 @pytest.mark.database
-def test_chek_all_users():
-    db = Database()
-    users = db.get_all_users()
+def test_chek_all_users(sqlite_table_connection):
+    users = sqlite_table_connection.get_all_users()
     print(users)
 
 
 @pytest.mark.database
-def test_check_user_sergii():
-    db = Database()
-    user = db.get_user_address_by_name("Sergii")
+def test_check_user_sergii(sqlite_table_connection):
+    user = sqlite_table_connection.get_user_address_by_name("Sergii")
 
     assert user[0][0] == "Maydan Nezalezhnosti 1"
     assert user[0][1] == "Kyiv"
@@ -27,37 +24,33 @@ def test_check_user_sergii():
 
 
 @pytest.mark.database
-def test_product_qnt_update():
-    db = Database()
-    db.update_product_qnt_by_id(1, 25)
-    water_qnt = db.select_product_qnt_by_id(1)
+def test_product_qnt_update(sqlite_table_connection):
+    sqlite_table_connection.update_product_qnt_by_id(1, 25)
+    water_qnt = sqlite_table_connection.select_product_qnt_by_id(1)
 
     assert water_qnt[0][0] == 25
 
 
 @pytest.mark.database
-def test_product_insert():
-    db = Database()
-    db.insert_product(4, "печиво", "солодке", 30)
-    water_qnt = db.select_product_qnt_by_id(4)
+def test_product_insert(sqlite_table_connection):
+    sqlite_table_connection.insert_product(4, "печиво", "солодке", 30)
+    water_qnt = sqlite_table_connection.select_product_qnt_by_id(4)
 
     assert water_qnt[0][0] == 30
 
 
 @pytest.mark.database
-def test_product_delete():
-    db = Database()
-    db.insert_product(99, "tests", "data", 99)
-    db.delete_product_by_id(99)
-    qnt = db.select_product_qnt_by_id(99)
+def test_product_delete(sqlite_table_connection):
+    sqlite_table_connection.insert_product(99, "tests", "data", 99)
+    sqlite_table_connection.delete_product_by_id(99)
+    qnt = sqlite_table_connection.select_product_qnt_by_id(99)
 
     assert len(qnt) == 0
 
 
 @pytest.mark.database
-def test_detailed_orders():
-    db = Database()
-    orders = db.get_detailed_orders()
+def test_detailed_orders(sqlite_table_connection):
+    orders = sqlite_table_connection.get_detailed_orders()
     print("Замовлення", orders)
     # Check quantity of orders equal to 1
     assert len(orders) == 1
@@ -69,7 +62,6 @@ def test_detailed_orders():
 
 
 @pytest.mark.database
-def test_chek_all_data():
-    db = Database()
-    users = db.get_all_data()
+def test_chek_all_data(sqlite_table_connection):
+    users = sqlite_table_connection.get_all_data()
     print(users)

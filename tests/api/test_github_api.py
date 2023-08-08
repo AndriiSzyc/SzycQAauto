@@ -45,6 +45,8 @@ def test_repo_with_single_char_be_found(github_api):
 
 
 # Tests API to list and view all the available emojis to use on GitHub
+
+
 @pytest.mark.api
 def test_all_emojis_can_be_found(github_api):
     emoji = github_api.get_emojis()
@@ -91,18 +93,80 @@ def test_commits_cannot_be_found(github_api):
 
 
 @pytest.mark.api
-def test_chek_message_commit(github_api):
-    commit = github_api.list_commits("AndriiSzyc", "SzycQAauto")
-    assert commit[0]["commit"]["message"] != "null"
+def test_chek_SHA_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"sha": "5b291699d4c9e8cb8e69d47c86566eb232c43aeb"}
+    )
+
+    assert len(commits) >= 2
+    assert commits[-2]["parents"][0]["sha"] == commits[-1]["sha"]
 
 
 @pytest.mark.api
-def test_chek_reponame_commit(github_api):
-    commit = github_api.list_commits("AndriiSzyc", "SzycQAauto")
-    assert "SzycQAauto" and "AndriiSzyc" in commit[0]["commit"]["tree"]["url"]
+def test_chek_PATH_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"path": ".gitignore"}
+    )
+
+    assert len(commits) >= 3
+    assert commits[0]["commit"]["author"]["name"] == "Andrii Shyts"
 
 
 @pytest.mark.api
-def test_parents(github_api):
-    commit = github_api.list_commits("AndriiSzyc", "SzycQAauto")
-    assert commit[-1]["parents"] == []
+def test_chek_AUTHOR_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"author": "andrewszyc@ukr.net"}
+    )
+
+    assert len(commits) >= 21
+    assert commits[0]["commit"]["author"]["name"] == "Andrii Shyts"
+    assert commits[0]["commit"]["author"]["email"] == "andrewszyc@ukr.net"
+
+
+@pytest.mark.api
+def test_chek_COMMITER_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"committer": "AndriiSzyc"}
+    )
+
+    assert len(commits) >= 21
+    assert commits[0]["commit"]["committer"]["name"] == "Andrii Shyts"
+    assert commits[0]["commit"]["committer"]["email"] == "andrewszyc@ukr.net"
+
+
+@pytest.mark.api
+def test_chek_SINCE_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"since": "2023-08-07T17:52:42Z"}
+    )
+
+    assert len(commits) >= 1
+    assert commits[-1]["commit"]["author"]["date"] == "2023-08-07T17:52:42Z"
+    assert commits[-1]["commit"]["message"] == "Added API emoji tests"
+
+
+@pytest.mark.api
+def test_chek_UNTIL_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"until": "2023-07-04T10:14:43Z"}
+    )
+
+    assert len(commits) == 13
+    assert commits[0]["commit"]["author"]["date"] == "2023-07-04T10:14:43Z"
+    assert commits[0]["commit"]["message"] == "Create empty project"
+
+
+@pytest.mark.api
+def test_chek_PER_PAGE_params(github_api):
+    commits = github_api.list_commits("AndriiSzyc", "SzycQAauto", {"per_page": 2})
+
+    assert len(commits) == 2
+
+
+@pytest.mark.api
+def test_chek_PAGE_params(github_api):
+    commits = github_api.list_commits(
+        "AndriiSzyc", "SzycQAauto", {"per_page": 10, "page": 2}
+    )
+
+    assert len(commits) == 10

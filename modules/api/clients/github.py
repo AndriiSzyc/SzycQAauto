@@ -33,10 +33,11 @@ class GitHub:
 
         return body
 
-    def list_commits(self, owner_name, repo_name):
+    def list_commits(self, owner_name, repo_name, params=None):
         r = requests.get(
             f"https://api.github.com/repos/{owner_name}/{repo_name}/commits",
             headers=self.HEADERS,
+            params=params,
         )
         body = r.json()
 

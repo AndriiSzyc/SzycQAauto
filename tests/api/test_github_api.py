@@ -3,49 +3,48 @@ import requests
 import random
 
 
-# User is able to search for an existing user
 @pytest.mark.api
 def test_user_exists(github_api):
+    # User is able to search for an existing user
     user = github_api.get_user("defunkt")
 
     assert user["login"] == "defunkt"
 
 
-# User is able to search non-existent user
 @pytest.mark.api
 def test_user_not_exists(github_api):
+    # User is able to search non-existent user
     user = github_api.get_user("butenkosergii")
 
     assert user["message"] == "Not Found"
 
 
-# User is able to search for an existing repo
 @pytest.mark.api
 def test_repo_can_be_found(github_api):
+    # User is able to search for an existing repo
     repo = github_api.search_repo("become-qa-auto")
 
     assert repo["total_count"] == 43
     assert "become-qa-auto" in repo["items"][0]["name"]
 
 
-# User is able to search for non existing repo
 @pytest.mark.api
 def test_repo_cannot_be_found(github_api):
+    # User is able to search for non existing repo
     repo = github_api.search_repo("sergiibutenko_repo_non_exist")
 
     assert repo["total_count"] == 0
 
 
-# User is able to search for the repo with name that consists from 1 character
 @pytest.mark.api
 def test_repo_with_single_char_be_found(github_api):
+    # User is able to search for the repo with name that consists from 1 character
     repo = github_api.search_repo("s")
 
     assert repo["total_count"] != 0
 
 
 # Tests API to list and view all the available emojis to use on GitHub
-
 
 @pytest.mark.api
 def test_all_emojis_can_be_found(github_api):
@@ -70,18 +69,17 @@ def test_can_be_found_special_emoji(github_api):
 def test_cannot_be_found_emoji(github_api):
     emoji = github_api.get_emojis()
 
-    assert "andrii" not in emoji
+    assert "message" not in emoji
 
 
 # Tests API to interact with commits
 
-
 @pytest.mark.api
 def test_commits_can_be_found(github_api):
-    commits = github_api.list_commits("sergii-butenko-gl", "become-qa-auto-aug2020")
+    commits = github_api.list_commits("AndriiSzyc", "SzycQAauto")
 
     assert isinstance(commits, list)
-    assert commits[0]["commit"]["author"]["name"] == "Sergii Butenko"
+    assert commits[0]["commit"]["author"]["name"] == "Andrii Shyts"
 
 
 @pytest.mark.api
@@ -92,57 +90,61 @@ def test_commits_cannot_be_found(github_api):
     assert commits["message"] == "Not Found"
 
 
+# Positive tests to query parameters to interact with commits
+
 @pytest.mark.api
 def test_chek_SHA_params(github_api):
     commits = github_api.list_commits(
-        "AndriiSzyc", "SzycQAauto", {"sha": "5b291699d4c9e8cb8e69d47c86566eb232c43aeb"}
+        "AndriiSzyc",
+        "IT_test_drive",
+        {"sha": "fc13642796f72ec77b7820e476f3739d3f9f263f"},
     )
 
-    assert len(commits) >= 2
-    assert commits[-2]["parents"][0]["sha"] == commits[-1]["sha"]
+    assert len(commits) == 4
+    assert commits[0]["parents"][0]["sha"] == commits[1]["sha"]
 
 
 @pytest.mark.api
 def test_chek_PATH_params(github_api):
     commits = github_api.list_commits(
-        "AndriiSzyc", "SzycQAauto", {"path": ".gitignore"}
+        "AndriiSzyc", "SzycQAauto", {"path": "config/config.py"}
     )
 
-    assert len(commits) >= 3
+    assert len(commits) == 1
     assert commits[0]["commit"]["author"]["name"] == "Andrii Shyts"
 
 
 @pytest.mark.api
 def test_chek_AUTHOR_params(github_api):
     commits = github_api.list_commits(
-        "AndriiSzyc", "SzycQAauto", {"author": "andrewszyc@ukr.net"}
+        "AndriiSzyc", "IT_test_drive", {"author": "andrewszyc@ukr.net"}
     )
 
-    assert len(commits) >= 21
-    assert commits[0]["commit"]["author"]["name"] == "Andrii Shyts"
+    assert len(commits) == 1
+    assert commits[0]["commit"]["author"]["name"] == "andrii"
     assert commits[0]["commit"]["author"]["email"] == "andrewszyc@ukr.net"
 
 
 @pytest.mark.api
 def test_chek_COMMITER_params(github_api):
     commits = github_api.list_commits(
-        "AndriiSzyc", "SzycQAauto", {"committer": "AndriiSzyc"}
+        "AndriiSzyc", "IT_test_drive", {"committer": "AndriiSzyc"}
     )
 
-    assert len(commits) >= 21
-    assert commits[0]["commit"]["committer"]["name"] == "Andrii Shyts"
-    assert commits[0]["commit"]["committer"]["email"] == "andrewszyc@ukr.net"
+    assert len(commits) == 4
+    assert commits[-1]["commit"]["committer"]["name"] == "andrii"
+    assert commits[-1]["commit"]["committer"]["email"] == "andrewszyc@ukr.net"
 
 
 @pytest.mark.api
 def test_chek_SINCE_params(github_api):
     commits = github_api.list_commits(
-        "AndriiSzyc", "SzycQAauto", {"since": "2023-08-07T17:52:42Z"}
+        "AndriiSzyc", "IT_test_drive", {"since": "2023-03-25T08:37:53Z"}
     )
 
-    assert len(commits) >= 1
-    assert commits[-1]["commit"]["author"]["date"] == "2023-08-07T17:52:42Z"
-    assert commits[-1]["commit"]["message"] == "Added API emoji tests"
+    assert len(commits) == 6
+    assert commits[-1]["commit"]["author"]["date"] == "2023-03-25T08:37:53Z"
+    assert commits[-1]["commit"]["message"] == "add docker"
 
 
 @pytest.mark.api

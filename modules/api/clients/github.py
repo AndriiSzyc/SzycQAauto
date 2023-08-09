@@ -3,17 +3,23 @@ import os
 
 
 class GitToken:
-    @classmethod
-    def get_token(cls):
-        return os.environ.get("GIT_TOKEN")
+    def __init__(self):
+        self.token = os.environ.get("GIT_TOKEN")
+
+    def get_token(self):
+        return self.token
 
 
 class GitHub:
     HEADERS = {
         "Accept": "application/vnd.github+json",
-        "Authorization": "Bearer " + GitToken.get_token(),
+        "Authorization": "",
         "X-GitHub-Api-Versio": "2022-11-28",
     }
+
+    def __init__(self):
+        self.token = GitToken()
+        GitHub.HEADERS["Authorization"] = f"Bearer {self.token.get_token()}"
 
     def get_user(self, username):
         r = requests.get(

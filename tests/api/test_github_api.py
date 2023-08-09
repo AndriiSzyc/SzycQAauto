@@ -46,6 +46,7 @@ def test_repo_with_single_char_be_found(github_api):
 
 # Tests API to list and view all the available emojis to use on GitHub
 
+
 @pytest.mark.api
 def test_all_emojis_can_be_found(github_api):
     emoji = github_api.get_emojis()
@@ -74,6 +75,7 @@ def test_cannot_be_found_emoji(github_api):
 
 # Tests API to interact with commits
 
+
 @pytest.mark.api
 def test_commits_can_be_found(github_api):
     commits = github_api.list_commits("AndriiSzyc", "SzycQAauto")
@@ -91,6 +93,7 @@ def test_commits_cannot_be_found(github_api):
 
 
 # Positive tests to query parameters to interact with commits
+
 
 @pytest.mark.api
 def test_chek_SHA_params(github_api):

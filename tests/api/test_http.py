@@ -1,6 +1,10 @@
 import pytest
 import requests
 
+"""Tests that send request to the GitHub server.
+Testing code status, response body testing, header testing.
+"""
+
 
 @pytest.mark.http
 def test_first_request():

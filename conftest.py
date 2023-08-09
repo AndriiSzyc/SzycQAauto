@@ -1,20 +1,10 @@
 import pytest
+from tests.api.test_fixture import User
 from modules.api.clients.github import GitHub
 from modules.common.database import Database
 
-
-class User:
-    def __init__(self) -> None:
-        self.name = None
-        self.second_name = None
-
-    def create(self):
-        self.name = "Andrii"
-        self.second_name = "Szyc"
-
-    def remove(self):
-        self.name = ""
-        self.second_name = ""
+"""In this file defines the fixture functions 
+to make them available to make them accessible across multiple test files."""
 
 
 @pytest.fixture

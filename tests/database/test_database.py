@@ -3,7 +3,7 @@ from modules.common.database import Database
 
 
 @pytest.mark.database
-def test_database_connection(sqlite_table_connection):
+def test_to_check_database_connection(sqlite_table_connection):
     sqlite_table_connection.test_connection()
 
 

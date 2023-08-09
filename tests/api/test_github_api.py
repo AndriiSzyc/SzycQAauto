@@ -5,7 +5,7 @@ import random
 
 @pytest.mark.api
 def test_user_exists(github_api):
-    # User is able to search for an existing user
+    """User is able to search for an existing user"""
     user = github_api.get_user("defunkt")
 
     assert user["login"] == "defunkt"
@@ -13,7 +13,7 @@ def test_user_exists(github_api):
 
 @pytest.mark.api
 def test_user_not_exists(github_api):
-    # User is able to search non-existent user
+    """User is able to search non-existent user"""
     user = github_api.get_user("butenkosergii")
 
     assert user["message"] == "Not Found"
@@ -21,7 +21,7 @@ def test_user_not_exists(github_api):
 
 @pytest.mark.api
 def test_repo_can_be_found(github_api):
-    # User is able to search for an existing repo
+    """User is able to search for an existing repo"""
     repo = github_api.search_repo("become-qa-auto")
 
     assert repo["total_count"] == 43
@@ -30,7 +30,7 @@ def test_repo_can_be_found(github_api):
 
 @pytest.mark.api
 def test_repo_cannot_be_found(github_api):
-    # User is able to search for non existing repo
+    """ser is able to search for non existing repo"""
     repo = github_api.search_repo("sergiibutenko_repo_non_exist")
 
     assert repo["total_count"] == 0
@@ -38,13 +38,13 @@ def test_repo_cannot_be_found(github_api):
 
 @pytest.mark.api
 def test_repo_with_single_char_be_found(github_api):
-    # User is able to search for the repo with name that consists from 1 character
+    """User is able to search for the repo with name that consists from 1 character"""
     repo = github_api.search_repo("s")
 
     assert repo["total_count"] != 0
 
 
-# Tests API to list and view all the available emojis to use on GitHub
+"""Tests API to list and view all the available emojis to use on GitHub"""
 
 
 @pytest.mark.api
@@ -73,7 +73,7 @@ def test_cannot_be_found_emoji(github_api):
     assert "message" not in emoji
 
 
-# Tests API to interact with commits
+"""Tests API to interact with commits"""
 
 
 @pytest.mark.api
@@ -92,7 +92,7 @@ def test_commits_cannot_be_found(github_api):
     assert commits["message"] == "Not Found"
 
 
-# Positive tests to query parameters to interact with commits
+"""Positive tests to query parameters to interact with commits"""
 
 
 @pytest.mark.api

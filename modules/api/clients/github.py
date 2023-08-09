@@ -11,6 +11,11 @@ class GitToken:
 
 
 class GitHub:
+    """A client that uses the GITHUB API to communicate with the server.
+    In which we will describe all requests from the github documentation API
+    that we will use.
+    """
+
     HEADERS = {
         "Accept": "application/vnd.github+json",
         "Authorization": "",

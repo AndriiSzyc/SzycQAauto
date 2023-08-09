@@ -2,6 +2,8 @@ import sqlite3
 
 
 class Database:
+    """class for database connection"""
+
     def __init__(self):
         # entity to interact with the database
         self.connection = sqlite3.connect(

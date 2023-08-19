@@ -27,14 +27,13 @@ class Database:
         return record
 
     def get_user_by_name(self, username):
-        query = "SELECT name, address, city FROM customers WHERE name = ?"
+        query = "SELECT name, address, city FROM customers WHERE name=?"
         record = self.cursor.execute(query, (username,)).fetchall()
         return record
 
     def get_user_address_by_name(self, username):
         query = (
-            "SELECT address, city, postalCode, country FROM customers WHERE name = ?"
-        )
+            "SELECT address, city, postalCode, country FROM customers WHERE name=?")
         record = self.cursor.execute(query, (username,)).fetchall()
         return record
 
@@ -44,12 +43,12 @@ class Database:
         return record
 
     def get_quantity_by_name_and_description_prodact(self, product_name, description):
-        query = "SELECT id, name, description, quantity FROM products WHERE name = ? AND description = ?"
+        query = "SELECT id, name, description, quantity FROM products WHERE name=? AND description=?"
         record = self.cursor.execute(query, (product_name, description)).fetchall()
         return record
 
     def update_product_qnt_by_ID(self, product_id, qnt):
-        query = "UPDATE products SET quantity = ? WHERE id = ?"
+        query = "UPDATE products SET quantity=? WHERE id=?"
         self.cursor.execute(query, (product_id, qnt))
         self.conection.commit()
 

@@ -11,9 +11,7 @@ to make them available to make them accessible across multiple test files."""
 def user():
     user = User()
     user.create()
-
     yield user
-
     user.remove()
 
 
@@ -24,6 +22,7 @@ def github_api():
 
 
 @pytest.fixture
-def sqlite_table_connection():
-    table_connection = Database()
-    yield table_connection
+def db():
+    db = Database()
+    yield db
+

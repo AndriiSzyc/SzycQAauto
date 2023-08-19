@@ -1,7 +1,6 @@
 import pytest
 
 
-
 @pytest.mark.database
 def test_database_connection(db):
     """test to check database connection"""
@@ -136,7 +135,6 @@ def test_delete_order_by_ID(db):
     record = db.select_order_by_ID(99)
 
     assert len(record) == 0
-
 
 
 @pytest.mark.database

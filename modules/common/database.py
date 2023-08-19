@@ -91,21 +91,11 @@ class Database:
         self.cursor.execute(query, (order_id,))
         self.conection.commit()
 
-
     def select_order_by_ID(self, product_id):
         query = "SELECT order_date FROM orders WHERE id=?"
         record = self.cursor.execute(query, (product_id,)).fetchall()
         return record
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
     def get_all_data_in_orders(self):
         query = "SELECT * FROM orders"
         record = self.cursor.execute(query).fetchall()

@@ -25,4 +25,3 @@ def github_api():
 def db():
     db = Database()
     yield db
-

@@ -35,6 +35,6 @@ If you need to run all the test scripts, just type the pytest command in the ter
 
 However, you do not need to test the entire product with tests to solve your working question. If you want to check its small component, then in the terminal you need to specify the pytest command - m <mark.name>
 
-For example, to call test cases for API only:  
-
+For example, to call test cases for API only: 
+                                                  
                                                   pytest -m api

@@ -17,7 +17,7 @@ Steps required to install the project and also the required dependencies.
 
           3. Selenium - pip3 install selenium --user
 
-          You may need to install it as a superuser
+   You may need to install it as a superuser
 3. Download ChromeDriver for Selenium.
               Go to the link https://chromedriver.chromium.org/downloads. Select the driver according to the Chrome version, and then select the platform.
 

@@ -8,7 +8,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 
-
 @pytest.mark.ui
 def test_check_incorrect_username():
     # creating an object to controle browser

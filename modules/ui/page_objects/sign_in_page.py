@@ -1,5 +1,6 @@
 from modules.ui.page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By
+import time
 
 
 class SignInPage(BasePage):
@@ -33,3 +34,11 @@ class SignInPage(BasePage):
     # Check that name of page is what we expect
     def check_title(self, expected_title):
         return self.driver.title == expected_title
+
+    def get_create_acc_page(self):
+        elem = self.driver.find_element(By.XPATH, "//*[@id='login']/p/a")
+        elem.click()
+
+    @staticmethod
+    def implicitly_wait(time_wait):
+        time.sleep(time_wait)

@@ -32,8 +32,7 @@ class Database:
         return record
 
     def get_user_address_by_name(self, username):
-        query = (
-            "SELECT address, city, postalCode, country FROM customers WHERE name=?")
+        query = "SELECT address, city, postalCode, country FROM customers WHERE name=?"
         record = self.cursor.execute(query, (username,)).fetchall()
         return record
 

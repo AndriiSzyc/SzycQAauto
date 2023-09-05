@@ -18,3 +18,11 @@ def test_check_incorrect_username_page_object():
 
     # Close Browser
     sign_in_page.close()
+
+
+@pytest.mark.ui
+def test_get_create_account_page(ui_fix):
+    ui_fix.get_create_acc_page()
+    ui_fix.implicitly_wait(2)
+
+    assert ui_fix.check_title("Join GitHub · GitHub")

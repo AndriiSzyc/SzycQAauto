@@ -4,6 +4,7 @@
 This framework was developed to automate API and UI testing on GitHub.com. Also contains a database testing module and test cases for HTTP responses.
 
 In this Framework, the tester can create test scripts module-wise by breaking down the whole application into smaller modules as per the client's requirements and creating test scripts individually. A modular-driven framework ensures the division of scripts which leads to easier maintenance and scalability. You can write independent test scripts.
+UI testing uses the Page Object Model approach.
 
 ## How to Install and Run the Project
 Steps required to install the project and also the required dependencies.

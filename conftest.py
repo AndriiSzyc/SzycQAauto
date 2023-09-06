@@ -3,6 +3,7 @@ from tests.api.test_fixture import User
 from modules.api.clients.github import GitHub
 from modules.common.database import Database
 from modules.ui.page_objects.sign_in_page import SignInPage
+from modules.ui.page_objects.start_page_amzn import SignInPage
 
 """In this file defines the fixture functions 
 to make them available to make them accessible across multiple test files."""
@@ -30,6 +31,15 @@ def db():
 
 @pytest.fixture
 def ui_fix():
+    paje_object = SignInPage()
+    paje_object.go_to()
+    yield paje_object
+
+    paje_object.close()
+
+
+@pytest.fixture
+def ui_for_amzn():
     paje_object = SignInPage()
     paje_object.go_to()
     yield paje_object

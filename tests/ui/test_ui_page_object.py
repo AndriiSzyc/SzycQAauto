@@ -2,7 +2,7 @@ from modules.ui.page_objects.sign_in_page import SignInPage
 import pytest
 
 
-@pytest.mark.ui
+@pytest.mark.ui_pom
 def test_check_incorrect_username_page_object():
     # Creating page object
     sign_in_page = SignInPage()
@@ -20,9 +20,17 @@ def test_check_incorrect_username_page_object():
     sign_in_page.close()
 
 
-@pytest.mark.ui
+@pytest.mark.ui_pom
 def test_get_create_account_page(ui_fix):
     ui_fix.get_create_acc_page()
     ui_fix.implicitly_wait(2)
 
     assert ui_fix.check_title("Join GitHub · GitHub")
+
+
+@pytest.mark.ui_pom
+def test_forgot_password(ui_fix):
+    ui_fix.get_forgot_password()
+    ui_fix.implicitly_wait(2)
+
+    assert ui_fix.check_title("Forgot your password? · GitHub")

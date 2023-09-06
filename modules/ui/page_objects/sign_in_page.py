@@ -36,8 +36,10 @@ class SignInPage(BasePage):
         return self.driver.title == expected_title
 
     def get_create_acc_page(self):
-        elem = self.driver.find_element(By.XPATH, "//*[@id='login']/p/a")
-        elem.click()
+        self.driver.find_element(By.XPATH, "//*[@id='login']/div[5]/a").click()
+
+    def get_forgot_password(self):
+        self.driver.find_element(By.ID, "forgot-password").click()
 
     @staticmethod
     def implicitly_wait(time_wait):

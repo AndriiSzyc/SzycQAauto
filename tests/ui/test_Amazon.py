@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 
-@pytest.mark.ui
+@pytest.mark.ui_amzn
 def test_incorrect_username():
     # creating an object to control the browser
     driver = webdriver.Chrome(
@@ -43,7 +43,7 @@ def test_incorrect_username():
     driver.close()
 
 
-@pytest.mark.ui
+@pytest.mark.ui_amzn
 def test_empty_cart():
     driver = webdriver.Chrome(
         service=Service(r"/home/andrii/QAauto/tests_practice/" + "chromedriver")
@@ -65,7 +65,7 @@ def test_empty_cart():
     driver.close()
 
 
-@pytest.mark.ui
+@pytest.mark.ui_amzn
 def test_search():
     driver = webdriver.Chrome(
         service=Service(r"/home/andrii/QAauto/tests_practice/" + "chromedriver")

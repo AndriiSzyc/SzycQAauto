@@ -7,16 +7,14 @@ from selenium.webdriver.common.by import By
 
 
 @pytest.mark.ui
-def test_get_create_account_page():
+def test__forgot_password():
     driver = webdriver.Chrome(
         service=Service(r"/home/andrii/QAauto/tests_practice/" + "chromedriver")
     )
     driver.get("https://github.com/login")
-    elem = driver.find_element(By.XPATH, "//*[@id='login']/div[5]/a")
-    elem.click()
+    driver.find_element(By.ID, "forgot-password").click()
+    driver.implicitly_wait(4)
 
-    driver.implicitly_wait(5)
-
-    assert driver.title == "Join GitHub · GitHub"
+    assert driver.title == "Forgot your password? · GitHub"
 
     driver.close()

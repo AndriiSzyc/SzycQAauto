@@ -1,4 +1,3 @@
-from modules.ui.page_objects.start_page_amzn import SignInPage
 import pytest
 
 
@@ -19,6 +18,6 @@ def test_empty_cart(ui_for_amzn):
 
 @pytest.mark.ui_amzn
 def test_search_amzn(ui_for_amzn):
-    ui_for_amzn.search_amzn("Black Mesa")
+    ui_for_amzn.search_amzn("half life")
 
-    assert ui_for_amzn.check_title("Amazon.com : Black Mesa")
+    assert ui_for_amzn.check_title("Amazon.com : half life")

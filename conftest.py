@@ -41,7 +41,7 @@ def ui_fix():
 @pytest.fixture
 def ui_for_amzn():
     paje_object = StartPage()
-    paje_object.go_to()
+    
     yield paje_object
 
     paje_object.close()

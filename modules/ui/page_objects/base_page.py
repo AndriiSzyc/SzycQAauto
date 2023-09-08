@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.service import Service
 
 class BasePage:
     PATH = r"/home/andrii/QAauto/SzycQAauto/"
-    DRIVER_NAME = "chromedriver"
+    DRIVER_NAME =  "chromedriver"
 
     def __init__(self) -> None:
         self.driver = webdriver.Chrome(

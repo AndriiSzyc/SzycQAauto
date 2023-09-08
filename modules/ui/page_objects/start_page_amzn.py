@@ -8,8 +8,6 @@ class StartPage(BasePage):
 
     def __init__(self) -> None:
         super().__init__()
-
-    def go_to(self):
         self.driver.get(StartPage.URL)
 
     def try_login(self, username):

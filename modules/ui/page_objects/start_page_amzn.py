@@ -3,14 +3,14 @@ from selenium.webdriver.common.by import By
 import time
 
 
-class SignInPage(BasePage):
+class StartPage(BasePage):
     URL = "https://www.amazon.com/"
 
     def __init__(self) -> None:
         super().__init__()
 
     def go_to(self):
-        self.driver.get(SignInPage.URL)
+        self.driver.get(StartPage.URL)
 
     def try_login(self, username):
         self.driver.find_element(
